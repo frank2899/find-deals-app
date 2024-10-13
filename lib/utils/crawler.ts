@@ -5,7 +5,7 @@ import { ProductResponse } from './types'
 export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: number) => {
     const browser = await puppeteer.launch({
         // args: chromium.args,
-        args: process.env.CHROME_LAUNCHER ? ['--no-sandbox'] : ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--headless'],
+        args: process.env.CHROME_LAUNCHER ? ['--no-sandbox', '--headless'] : ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--headless'],
         defaultViewport: chromium.defaultViewport,
         executablePath: process.env.CHROME_LAUNCHER || (await chromium.executablePath()),
         headless: process.env.CHROME_LAUNCHER ? false : chromium.headless,
