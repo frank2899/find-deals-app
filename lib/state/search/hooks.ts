@@ -14,7 +14,7 @@ type SearchState = [
     (payload: number) => void,
     (payload: number) => void,
     (payload: ProductResponse[]) => void,
-    (payload: string) => void
+    (payload: string) => void,
 ]
 
 export const useSearchState = (): SearchState => {
@@ -57,7 +57,7 @@ export const useSearchState = (): SearchState => {
         (payload: string) => {
             let list: string[] = [...recentSearches]
 
-            if(payload){
+            if (payload) {
                 list.unshift(payload)
                 list = list.slice(0, 5)
             }

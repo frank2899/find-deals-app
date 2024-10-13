@@ -19,12 +19,11 @@ export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: num
     await page.goto(url, { waitUntil: 'networkidle0' })
     await page.waitForSelector('.sh-dgr__grid-result')
 
-    const { location, products }: { location:string, products: ProductResponse[] } = await page.evaluate(() => {
-
+    const { location, products }: { location: string; products: ProductResponse[] } = await page.evaluate(() => {
         const productContainers = document.querySelectorAll('.sh-dgr__grid-result')
         const location = document.querySelector('div.sh-dr__restricts div[title]')?.getAttribute('title') || ''
 
-        const list =  Array.from(productContainers).map((item: any) => {
+        const list = Array.from(productContainers).map((item: any) => {
             // Get the image and product name
             const image = item.querySelector('.sh-dgr__content > div img')?.getAttribute('src')
             const product = item.querySelectorAll('.sh-dgr__content > span [data-sh-gr="line"]')[0]?.innerText || ''
@@ -54,7 +53,7 @@ export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: num
             }
         })
 
-        return { location, products: list}
+        return { location, products: list }
     })
 
     await browser.close()

@@ -41,33 +41,36 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
         setHydratedRecentSearches(recentSearches)
     }, [results, recentSearches])
 
-    const handleSearch = useCallback(async (params?: HandleSearchInterace) => {
-        const search_ = search.trim()
-        if (search_.length <= 3) return
+    const handleSearch = useCallback(
+        async (params?: HandleSearchInterace) => {
+            const search_ = search.trim()
+            if (search_.length <= 3) return
 
-        try {
-            setIsLoading(true)
-            setIsError(false)
-            setRecentSearches(search_)
-            setResults([])
+            try {
+                setIsLoading(true)
+                setIsError(false)
+                setRecentSearches(search_)
+                setResults([])
 
-            let url = `/api?keyword=${search}`
-            if (!!params?.minPrice && !!params?.maxPrice) url = `${url}&minPrice=${params.minPrice}&maxPrice=${params.maxPrice}`
+                let url = `/api?keyword=${search}`
+                if (!!params?.minPrice && !!params?.maxPrice) url = `${url}&minPrice=${params.minPrice}&maxPrice=${params.maxPrice}`
 
-            const api = await fetch(url)
-            const { error, result } = await api.json()
+                const api = await fetch(url)
+                const { error, result } = await api.json()
 
-            if (error) throw error
+                if (error) throw error
 
-            setResults(result.products as ProductResponse[])
-            setLocation(result?.location as string)
-        } catch (error) {
-            console.error('Search failed:', error)
-            setIsError(true)
-        } finally {
-            setIsLoading(false)
-        }
-    }, [search, minPrice, maxPrice, setResults, setSearch])
+                setResults(result.products as ProductResponse[])
+                setLocation(result?.location as string)
+            } catch (error) {
+                console.error('Search failed:', error)
+                setIsError(true)
+            } finally {
+                setIsLoading(false)
+            }
+        },
+        [search, minPrice, maxPrice, setResults, setSearch],
+    )
 
     return (
         <SearchContext.Provider

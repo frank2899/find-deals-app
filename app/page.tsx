@@ -87,9 +87,17 @@ const Home = () => {
             <Container maxW="container.lg" p="0" my=".5rem">
                 <Flex gap="5px" alignItems="center" flexWrap="wrap">
                     <Text fontSize=".7rem">Recent Searches: </Text>
-                    {recentSearches ? <>
-                        {recentSearches.map((e: string, i: number) => <Badge fontSize=".7rem" borderRadius="rounded" key={i}>{e}</Badge>)}
-                    </> : <></>}
+                    {recentSearches ? (
+                        <>
+                            {recentSearches.map((e: string, i: number) => (
+                                <Badge fontSize=".7rem" borderRadius="rounded" key={i}>
+                                    {e}
+                                </Badge>
+                            ))}
+                        </>
+                    ) : (
+                        <></>
+                    )}
                 </Flex>
             </Container>
             <Results />

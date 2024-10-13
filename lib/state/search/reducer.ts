@@ -34,5 +34,5 @@ export default createReducer(initialState, (builder) =>
         })
         .addCase(updateRecentSearchesAction, (state, { payload }) => {
             state.recentSearches = payload
-        })
+        }),
 )
