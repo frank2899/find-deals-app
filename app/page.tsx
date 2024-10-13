@@ -18,25 +18,28 @@ import {
     FormControl,
     FormLabel,
     Button,
+    Box,
+    Stack,
+    Badge,
 } from '@chakra-ui/react'
 import { BiSearchAlt2 } from 'react-icons/bi'
 
 const Home = () => {
-    const { search, minPrice, maxPrice, setSearch, setMinPrice, setMaxPrice, handleSearch, isLoading } = useSearch()
+    const { search, minPrice, maxPrice, setSearch, setMinPrice, setMaxPrice, handleSearch, isLoading, recentSearches } = useSearch()
 
     const handleKeyPress = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter') handleSearch()
     }
 
     return (
-        <>
-            <Container maxW="container.md" boxShadow="base" p="6" rounded="lg" bg="white" mt="10">
+        <Box p="10px">
+            <Container maxW="container.lg" boxShadow="base" p="6" rounded="lg" bg="white" mt="10">
                 <Text mb="1rem" fontWeight="bolder" color="#122167">
                     Let's find good deals for you.
                 </Text>
                 <InputGroup size="md" mb="1rem">
                     <InputLeftElement mr="2rem">
-                        <BiSearchAlt2 fontSize="1.2rem" color="primary" />
+                        <BiSearchAlt2 fontSize="1.2rem" color="#122167" />
                     </InputLeftElement>
                     <Input
                         type="text"
@@ -81,9 +84,16 @@ const Home = () => {
                     </Flex>
                 </SimpleGrid>
             </Container>
-
+            <Container maxW="container.lg" p="0" my=".5rem">
+                <Flex gap="5px" alignItems="center" flexWrap="wrap">
+                    <Text fontSize=".7rem">Recent Searches: </Text>
+                    {recentSearches ? <>
+                        {recentSearches.map((e: string, i: number) => <Badge fontSize=".7rem" borderRadius="rounded" key={i}>{e}</Badge>)}
+                    </> : <></>}
+                </Flex>
+            </Container>
             <Results />
-        </>
+        </Box>
     )
 }
 

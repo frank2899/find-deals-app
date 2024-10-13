@@ -5,8 +5,7 @@ import { ProductResponse } from './types'
 export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: number) => {
     const browser = await puppeteer.launch({
         // args: chromium.args,
-        // args: ['--no-sandbox', '--headless', '--disable-gpu', '--disable-dev-shm-usage'],
-        args: ['--no-sandbox', '--headless'],
+        args: process.env.CHROME_LAUNCHER ? ['--no-sandbox'] : ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--headless'],
         defaultViewport: chromium.defaultViewport,
         executablePath: process.env.CHROME_LAUNCHER || (await chromium.executablePath()),
         headless: process.env.CHROME_LAUNCHER ? false : chromium.headless,
@@ -20,10 +19,12 @@ export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: num
     await page.goto(url, { waitUntil: 'networkidle0' })
     await page.waitForSelector('.sh-dgr__grid-result')
 
-    const products: ProductResponse[] = await page.evaluate(() => {
-        const productContainers = document.querySelectorAll('.sh-dgr__grid-result')
+    const { location, products }: { location:string, products: ProductResponse[] } = await page.evaluate(() => {
 
-        return Array.from(productContainers).map((item: any) => {
+        const productContainers = document.querySelectorAll('.sh-dgr__grid-result')
+        const location = document.querySelector('div.sh-dr__restricts div[title]')?.getAttribute('title') || ''
+
+        const list =  Array.from(productContainers).map((item: any) => {
             // Get the image and product name
             const image = item.querySelector('.sh-dgr__content > div img')?.getAttribute('src')
             const product = item.querySelectorAll('.sh-dgr__content > span [data-sh-gr="line"]')[0]?.innerText || ''
@@ -52,9 +53,11 @@ export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: num
                 shopName,
             }
         })
+
+        return { location, products: list}
     })
 
     await browser.close()
 
-    return products
+    return { location, products }
 }

@@ -4,6 +4,7 @@ import { ProductResponse } from '../utils/types'
 
 interface SearchContextType {
     search: string
+    location: string
     minPrice: number
     maxPrice: number
     results: ProductResponse[]
@@ -26,7 +27,8 @@ export const SearchContext = createContext<SearchContextType | undefined>(undefi
 export const SearchProvider = ({ children }: { children: ReactNode }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [isErrorFetching, setIsError] = useState<boolean>(false)
-    
+    const [location, setLocation] = useState<string>('')
+
     const [search, minPrice, maxPrice, results, recentSearches, setSearch, setMinPrice, setMaxPrice, setResults, setRecentSearches] = useSearchState()
 
     // Hydration state
@@ -57,8 +59,8 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
 
             if (error) throw error
 
-            setResults(result as ProductResponse[])
-            setSearch('')
+            setResults(result.products as ProductResponse[])
+            setLocation(result?.location as string)
         } catch (error) {
             console.error('Search failed:', error)
             setIsError(true)
@@ -71,6 +73,7 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
         <SearchContext.Provider
             value={{
                 search,
+                location,
                 minPrice,
                 maxPrice,
                 results: hydratedResults,

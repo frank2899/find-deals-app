@@ -59,7 +59,7 @@ export const useSearchState = (): SearchState => {
 
             if(payload){
                 list.unshift(payload)
-                list = list.slice(0, 10)
+                list = list.slice(0, 5)
             }
             console.log(list)
             dispatch(updateRecentSearchesAction(list))
