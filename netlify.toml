@@ -6,6 +6,7 @@
   package = "@netlify/plugin-nextjs"
   
 [functions]
+  timeout = 30
   memory = 1024
   node_bundler = "esbuild"
   external_node_modules = ["@sparticuz/chromium"]
