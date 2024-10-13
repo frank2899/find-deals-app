@@ -1612,10 +1612,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@netlify/plugin-nextjs@^5.4.0":
-  version "5.7.1"
-  resolved "https://registry.yarnpkg.com/@netlify/plugin-nextjs/-/plugin-nextjs-5.7.1.tgz#f097842708e3dffa2e0cd2368ffdb0a0aa94e4a6"
-  integrity sha512-32e2q8VqnyxfJixMypuupuHW+3F0XbP/uGNNB79Vn1asYh/oTbR9XBi4Cxnmgthy9hycaiMHm8SftGI+uWJmQw==
+"@netlify/plugin-nextjs@^5.7.4":
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/@netlify/plugin-nextjs/-/plugin-nextjs-5.7.4.tgz#3f8976c7115e99b0101b1878730d770854869b09"
+  integrity sha512-kOvZ/vn94r2kRXpwppeR610mRSJFbkVakvUoHwtJQczPUR0el9QfVwYNl+6CHMRQSGc94FNs/pT9R32uyWwUmQ==
 
 "@next/env@14.2.10":
   version "14.2.10"

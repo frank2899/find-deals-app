@@ -19,7 +19,7 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@netlify/plugin-nextjs": "^5.4.0",
+    "@netlify/plugin-nextjs": "^5.7.4",
     "@reduxjs/toolkit": "^2.2.7",
     "@sparticuz/chromium": "^129.0.0",
     "eslint-config-prettier": "^9.1.0",
