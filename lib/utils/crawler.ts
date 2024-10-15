@@ -2,8 +2,6 @@ import chromium from '@sparticuz/chromium'
 import puppeteer from 'puppeteer-core'
 import { ProductResponse } from './types'
 
-chromium.setGraphicsMode = true
-
 export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: number) => {
     const browser = await puppeteer.launch({
         // args: chromium.args,
