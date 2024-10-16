@@ -17,7 +17,7 @@ export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: num
             '--disable-gpu',
             '--disable-software-rasterize',],
         defaultViewport: chromium.defaultViewport,
-        executablePath: process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath('../../assets/chromium.br'))
+        executablePath: process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath('/var/task/node_modules/@sparticuz/chromium/bin'))
     })
 
     const page = await browser.newPage()
