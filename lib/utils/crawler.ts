@@ -8,7 +8,7 @@ chromium.setGraphicsMode = false
 export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: number) => {
     console.log(await chromium.executablePath())
     const browser = await puppeteer.launch({
-        args: chromium.args,
+        args: [...chromium.args, '--disable-gpu'],
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath()
     })
