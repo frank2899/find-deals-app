@@ -1,10 +1,9 @@
 import { Crawler } from '@/lib/utils/crawler'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
     try {
-        const url = new URL(req.url)
-        const searchParams = new URLSearchParams(url.searchParams)
+        const searchParams = req.nextUrl.searchParams
 
         const keyword = searchParams.get('keyword')
         const minPrice = searchParams.get('minPrice') ? parseInt(searchParams.get('minPrice')!) : undefined
