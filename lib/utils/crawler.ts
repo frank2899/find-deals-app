@@ -12,7 +12,10 @@ export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: num
         // defaultViewport: chromium.defaultViewport,
         // executablePath: await chromium.executablePath(process.env.CHROME_PATH),
         // headless: true,
-        args: chromium.args,
+        args: [...chromium.args,
+            '--disable-features=AudioServiceOutOfProcess',
+            '--disable-gpu',
+            '--disable-software-rasterize',],
         defaultViewport: chromium.defaultViewport,
         executablePath: process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath('/var/task/node_modules/@sparticuz/chromium/bin'))
     })
