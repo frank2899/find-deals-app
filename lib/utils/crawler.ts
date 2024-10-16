@@ -7,14 +7,9 @@ chromium.setGraphicsMode = false
 
 export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: number) => {
     const browser = await puppeteer.launch({
-        // args: chromium.args,
-        // args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--headless', '--disable-dev-shm-usage', '--single-process', '--no-zygote'],
-        // defaultViewport: chromium.defaultViewport,
-        // executablePath: await chromium.executablePath(process.env.CHROME_PATH),
-        // headless: true,
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
-        executablePath: process.env.CHROME_PATH || (await chromium.executablePath('/var/task/node_modules/@sparticuz/chromium/bin'))
+        executablePath: await chromium.executablePath(process.env.CHROME_PATH || '/var/task/node_modules/@sparticuz/chromium/bin')
     })
 
     const page = await browser.newPage()
