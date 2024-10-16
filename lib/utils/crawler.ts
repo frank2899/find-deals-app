@@ -14,7 +14,7 @@ export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: num
         // headless: true,
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
-        executablePath: process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath('/var/task/node_modules/@sparticuz/chromium/bin'))
+        executablePath: process.env.CHROME_PATH || (await chromium.executablePath('/var/task/node_modules/@sparticuz/chromium/bin'))
     })
 
     const page = await browser.newPage()
