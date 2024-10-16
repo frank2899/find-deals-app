@@ -62,7 +62,7 @@ export const Crawler = async (keyword: string, minPrice?: number, maxPrice?: num
         return { location, products: list }
     })
 
-    await browser.close()
+    if(browser) await browser.close()
 
     return { location, products }
 }
